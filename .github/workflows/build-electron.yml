@@ -23,15 +23,16 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '12'
           
       - name: Install Dependencies
         run:  npm install --no-optional
           
       - name: rebuild Electron
         run: |
+             npm install -g node-gyp
              npm rebuild --runtime=electron --target=12.0.5 --disturl=https://atom.io/download/atom-shell --abi=87    
-             npx node-gyp rebuild
+             node-gyp rebuild
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
